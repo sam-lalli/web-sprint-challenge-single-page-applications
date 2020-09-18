@@ -1,7 +1,8 @@
-import React, { useState,} from "react";
+import React, { useState, useEffect} from "react";
 import { Route } from 'react-router-dom'
 import Form from "./Form";
 import Home from "./Home";
+import schema from './formSchema'
 
 
 const initialFormErrors = {
@@ -21,6 +22,7 @@ const initialFormErrors = {
 const App = () => {
   const [pizzaOrder, setPizzaOrder] = useState([])
   const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(false)
   const [pizzaForm, setPizzaForm] = useState({
     order_name: '',
     size: '',
@@ -32,9 +34,16 @@ const App = () => {
     ham: false,
     peppers: false,
     pineapple: false,
-    save: false,
-
+    save: false, 
   })
+
+  useEffect(() => {
+    schema.isValid(pizzaForm)
+      .then(valid => {
+        setDisabled(!valid)
+      })
+  }, [pizzaForm])
+
   return (
     <>
       <Route exact path='/'>
@@ -48,6 +57,7 @@ const App = () => {
         setPizzaForm={setPizzaForm}
         formErrors={formErrors}
         setFormErrors={setFormErrors}
+        disabled={disabled}
         />
       </Route>
     </>

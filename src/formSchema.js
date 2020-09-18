@@ -15,5 +15,6 @@ export default yup.object().shape({
     ham: yup.boolean(),
     peppers: yup.boolean(),
     pineapple: yup.boolean(),
-    save: yup.boolean().oneOf([true], 'Must save toppings'),
+    save: yup.boolean().oneOf([true], 'Must save toppings')
+     //yup.boolean().oneOf([true], 'Must save toppings'),
   })

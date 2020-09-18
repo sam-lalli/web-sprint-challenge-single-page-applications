@@ -7,7 +7,7 @@ import schema from './formSchema'
 
 
 
-const Form = ({pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, setFormErrors}) => {
+const Form = ({pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, setFormErrors, disabled}) => {
 
 
     //validate
@@ -165,11 +165,11 @@ const Form = ({pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, s
                 />
                 <br></br>
 
-                <button type="submit">SUBMIT</button>
+                <button disabled={disabled} type="submit">SUBMIT</button>
                 <div className='errors'>
                         <div>{formErrors.order_name}</div>
                         <div>{formErrors.size}</div>
-                        <div>{formErrors.topping}</div>
+                        <div>{formErrors.save}</div>
                 </div>
             </form>
             {
@@ -183,8 +183,7 @@ const Form = ({pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, s
                     onion, 
                     ham, 
                     peppers, 
-                    pineapple, 
-                    mushrooms, } = order
+                    pineapple, } = order
 
                     return(
                         <div key={index}>
@@ -198,7 +197,6 @@ const Form = ({pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, s
                             <p>{ham}</p>
                             <p>{peppers}</p>
                             <p>{pineapple}</p>
-                            <p>{mushrooms}</p>
                         </div>
                     )
                 })
