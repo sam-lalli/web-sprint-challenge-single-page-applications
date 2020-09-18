@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState,} from "react";
+import { Route, Link } from 'react-router-dom'
+import Form from "./Form";
+import Home from "./Home";
 
 const App = () => {
+  const [pizzaOrder, setPizzaOrder] = useState([])
+  const [pizzaForm, setPizzaFrom] = useState({
+  })
+
+
   return (
     <>
-      
-      <h1>Lambda Eats</h1>
+      <Route exact path='/'>
+        <Home />
+      </Route>
+      <Route path='/pizza'>
+        <Form />
+      </Route>
     </>
   );
 };
