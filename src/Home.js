@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 
 const Home = (props) => {
 
@@ -12,7 +11,7 @@ const Home = (props) => {
         <Link to={'/'}>Home</Link>
     </header>
     <div>
-        <Link to={'/pizza'}>Create your Pizza</Link>
+        <Link name='pizzaBtn'to={'/pizza'}>Create your Pizza</Link>
     </div>
     <footer>
         <h1>Lambda Eats</h1>
