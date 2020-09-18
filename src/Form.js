@@ -7,7 +7,7 @@ import schema from './formSchema'
 
 
 
-const Form = (pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, setFormErrors) => {
+const Form = ({pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, setFormErrors}) => {
 
 
     //validate
@@ -45,10 +45,12 @@ const Form = (pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, se
     const onSubmit = e => {
         e.preventDefault();
         axios.post('https://reqres.in/api/pizza', pizzaForm)
-            .then(() => {
+            .then((res) => {
+                console.log(res.data)
                 setPizzaForm({
                     order_name: '',
                     size: '',
+                    instructions: '',
                     pepperoni: false,
                     bacon: false,
                     sausage: false,
@@ -56,7 +58,7 @@ const Form = (pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, se
                     ham: false,
                     peppers: false,
                     pineapple: false,
-                    mushrooms: false,
+                    save: false,
                 })
             })
             .catch(err => console.log(err))
@@ -88,6 +90,15 @@ const Form = (pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, se
                     <option value='Large'>Large</option>
                     <option value='Lambda'>Lambda Large</option>
                 </select>
+                
+                <label>Special Instructions:</label>
+                <input 
+                type='text'
+                value={pizzaForm.instructions}
+                name='instructions'
+                onChange={onChange}
+                placeholder="Enter instructions"
+                />
                 <br></br>
                 <label>Pepperoni</label>
                 <input 
@@ -145,20 +156,53 @@ const Form = (pizzaOrder, setPizzaOrder, pizzaForm, setPizzaForm, formErrors, se
                 onChange={onChange}
                 />
                 <br></br>
-                <label>Mushrooms</label>
+                <label>Save Toppings</label>
                 <input 
                 type='checkbox'
-                name='mushrooms'
-                checked={pizzaForm.mushrooms}
+                name='save'
+                checked={pizzaForm.save}
                 onChange={onChange}
                 />
                 <br></br>
 
-                <Link to={'/pizza/confimation'}type="submit">SUBMIT</Link>
-                <Route path='/pizza/confirmation'>
-                    <OrderStatus pizzaOrder={pizzaOrder}/>
-                </Route>
+                <button type="submit">SUBMIT</button>
+                <div className='errors'>
+                        <div>{formErrors.order_name}</div>
+                        <div>{formErrors.size}</div>
+                        <div>{formErrors.topping}</div>
+                </div>
             </form>
+            {
+                pizzaOrder.map((order, index) =>{
+                    const {   
+                    order_name,
+                    size,
+                    pepperoni,
+                    bacon,
+                    sausage, 
+                    onion, 
+                    ham, 
+                    peppers, 
+                    pineapple, 
+                    mushrooms, } = order
+
+                    return(
+                        <div key={index}>
+                            <h2>Name: {order_name}</h2>
+                            <p>Size: {size}</p>
+                            <p>Toppings:</p>
+                            <p>{pepperoni}</p>
+                            <p>{bacon}</p>
+                            <p>{sausage}</p>
+                            <p>{onion}</p>
+                            <p>{ham}</p>
+                            <p>{peppers}</p>
+                            <p>{pineapple}</p>
+                            <p>{mushrooms}</p>
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }

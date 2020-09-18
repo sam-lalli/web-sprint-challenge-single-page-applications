@@ -13,10 +13,6 @@ const Home = (props) => {
     <div>
         <Link name='pizzaBtn'to={'/pizza'}>Create your Pizza</Link>
     </div>
-    <footer>
-        <h1>Lambda Eats</h1>
-        <Link to={'/'}>Home</Link>
-    </footer>
     </>
     )
 }

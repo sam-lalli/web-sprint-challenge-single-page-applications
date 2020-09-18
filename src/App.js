@@ -7,6 +7,7 @@ import Home from "./Home";
 const initialFormErrors = {
   order_name: '',
   size: '',
+  instructions: '',
   pepperoni: false,
   bacon: false,
   sausage: false,
@@ -14,7 +15,7 @@ const initialFormErrors = {
   ham: false,
   peppers: false,
   pineapple: false,
-  mushrooms: false,
+  save: false,
 }
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
   const [pizzaForm, setPizzaForm] = useState({
     order_name: '',
     size: '',
+    instructions: "",
     pepperoni: false,
     bacon: false,
     sausage: false,
@@ -30,7 +32,7 @@ const App = () => {
     ham: false,
     peppers: false,
     pineapple: false,
-    mushrooms: false,
+    save: false,
 
   })
   return (
